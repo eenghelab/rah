@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>راه انقلاب | Rah Enghelab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        blood: {
+                            50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca', 300: '#fca5a5',
+                            400: '#f87171', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c',
+                            800: '#991b1b', 900: '#7f1d1d', 950: '#450a0a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #991b1b;
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #450a0a;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7f1d1d;
+        }
+
+        /* Particles Canvas */
+        #particles-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Slideshow */
+        .slide-layer {
+            position: absolute;
+            inset: 0;
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-layer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.6) 40%, rgba(69, 10, 10, 0.3) 100%);
+        }
+
+        .slide-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 10, 10, 0.7) 100%);
+        }
+
+        .slide-grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 0 0' xmlns='http://www.w3.org/200000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 128px 128px;
+        }
+
+        /* Ken Burns Animations - 8 different directions */
+        @keyframes kb1 {
+            0% {
+                transform: scale(1) translate(0, 0)
+            }
+
+            100% {
+                transform: scale(1.25) translate(-3%, -2%)
+            }
+        }
+
+        @keyframes kb2 {
+            0% {
+                transform: scale(1) translate(0, 0)
+            }
+
+            100% {
+                transform: scale(1.3) translate(3%, -1%)
+            }
+        }
+
+        @keyframes kb3 {
+            0% {
+                transform: scale(1) translate(0, 0)
+            }
+
+            100% {
+                transform: scale(1.2) translate(-2%, 3%)
+            }
+        }
+
+        @keyframes kb4 {
+            0% {
+                transform: scale(1) translate(0, 0)
+            }
+
+            100% {
+                transform: scale(1.28) translate(2%, 2%)
+            }
+        }
+
+        @keyframes kb5 {
+            0% {
+                transform: scale(1.05) translate(-2%, 0)
+            }
+
+            100% {
+                transform: scale(1.3) translate(2%, -3%)
+            }
+        }
+
+        @keyframes kb6 {
+            0% {
+                transform: scale(1.02) translate(3%, 1%)
+            }
+
+            100% {
+                transform: scale(1.25) translate(-3%, 2%)
+            }
+        }
+
+        @keyframes kb7 {
+            0% {
+                transform: scale(1) translate(-1%, 2%)
+            }
+
+            100% {
+                transform: scale(1.22) translate(1%, -2%)
+            }
+        }
+
+        @keyframes kb8 {
+            0% {
+                transform: scale(1.03) translate(2%, -2%)
+            }
+
+            100% {
+                transform: scale(1.3) translate(-2%, 3%)
+            }
+        }
+
+        .kb-1 {
+            animation: kb1 40s ease-out forwards;
+        }
+
+        .kb-2 {
+            animation: kb2 40s ease-out forwards;
+        }
+
+        .kb-3 {
+            animation: kb3 40s ease-out forwards;
+        }
+
+        .kb-4 {
+            animation: kb4 40s ease-out forwards;
+        }
+
+        .kb-5 {
+            animation: kb5 40s ease-out forwards;
+        }
+
+        .kb-6 {
+            animation: kb6 40s ease-out forwards;
+        }
+
+        .kb-7 {
+            animation: kb7 40s ease-out forwards;
+        }
+
+        .kb-8 {
+            animation: kb8 40s ease-out forwards;
+        }
+
+        /* Text Animations */
+        .slide-title,
+        .slide-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-title.visible,
+        .slide-subtitle.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-subtitle {
+            transition-delay: 0.4s;
+        }
+
+        /* Progress Bar */
+        @keyframes progressFill {
+            from {
+                width: 0%
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        #progress-bar {
+            height: 3px;
+            background: linear-gradient(to left, #dc2626, #f87171, #dc2626);
+            animation: progressFill 40s linear forwards;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+
+        /* Slide Indicators */
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: #dc2626;
+            border-color: #dc2626;
+            box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
+            transform: scale(1.3);
+        }
+
+        /* Scroll Indicator */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(8px)
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* Counter Glow */
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(220, 38, 38, 0.3), 0 0 60px rgba(220, 38, 38, 0.1);
+            }
+
+            50% {
+                text-shadow: 0 0 30px rgba(220, 38, 38, 0.5), 0 0 80px rgba(220, 38, 38, 0.2);
+            }
+        }
+
+        .counter-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        /* Red Line Decoration */
+        .red-line-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 100;
+            background: linear-gradient(to left, transparent, #dc2626, #f87171, #dc2626, transparent);
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #7f1d1d, #dc2626, #7f1d1d, transparent);
+            transform: translateX(50%);
+        }
+
+        @media(max-width:768px) {
+            .timeline-line {
+                right: 24px;
+            }
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #dc2626;
+            border: 3px solid #0a0a0a;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+            position: absolute;
+            right: 50%;
+            transform: translateX(50%);
+            top: 8px;
+            z-index: 2;
+        }
+
+        @media(max-width:768px) {
+            .timeline-dot {
+                right: 24px;
+            }
+        }
+
+        .timeline-entry {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .timeline-entry.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fade In Up for sections */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Red flash on slide change */
+        @keyframes redFlash {
+            0% {
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.15;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .flash-overlay {
+            position: absolute;
+            inset: 0;
+            background: #dc2626;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .flash-overlay.flash {
+            animation: redFlash 1.5s ease-out forwards;
+        }
+
+        /* Hero badge shimmer */
+        @keyframes shimmer {
+            0% {
+                background-position: 200% center;
+            }
+
+            100% {
+                background-position: -200% center;
+            }
+        }
+
+        .shimmer-badge {
+            background: linear-gradient(90deg, #450a0a 25%, #7f1d1d 50%, #450a0a 75%);
+            background-size: 200% auto;
+            animation: shimmer 4s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="font-vazir">
+
+    <!-- Red Top Line -->
+    <div class="red-line-top"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ===== SLIDESHOW ===== -->
+    <section id="slideshow" class="relative w-full h-screen overflow-hidden" style="z-index:2;">
+
+        <!-- Layer A -->
+        <div id="slide-a" class="slide-layer" style="opacity:1;">
+            <img id="img-a" src="" alt="" class="kb-1">
+            <div class="slide-overlay"></div>
+            <div class="slide-vignette"></div>
+            <div class="slide-grain"></div>
+        </div>
+
+        <!-- Layer B -->
+        <div id="slide-b" class="slide-layer" style="opacity:0;">
+            <img id="img-b" src="" alt="" class="kb-1">
+            <div class="slide-overlay"></div>
+            <div class="slide-vignette"></div>
+            <div class="slide-grain"></div>
+        </div>
+
+        <!-- Flash Overlay -->
+        <div id="flash" class="flash-overlay"></div>
+
+        <!-- Caption Container (shared, positioned over slides) -->
+        <div class="absolute inset-0 flex flex-col justify-end pb-32 md:pb-40 px-6 md:px-16 z-10">
+            <div class="max-w-3xl">
+                <div id="caption-badge"
+                    class="shimmer-badge inline-block px-4 py-1.5 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase text-blood-300 mb-4 border border-blood-800/50">
+                    یادمان زنده است و راهتان ادامه دارد
+                </div>
+                <h1 id="caption-title"
+                    class="slide-title visible text-3xl md:text-6xl lg:text-7xl font-black leading-tight text-white mb-4">
+                </h1>
+                <p id="caption-subtitle"
+                    class="slide-subtitle visible text-base md:text-xl font-light text-stone-300 leading-relaxed max-w-2xl">
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10"
+            id="indicators">
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="absolute bottom-0 left-0 right-0 z-10 bg-blood-950/50">
+            <div id="progress-bar"></div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div
+            class="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-60">
+            <span class="text-[10px] tracking-widest uppercase text-blood-400">اسکرول کنید</span>
+            <span class="iconify text-blood-500 text-xl" data-icon="mdi:chevron-down"></span>
+        </div>
+    </section>
+
+    <!-- ===== COUNTER SECTION ===== -->
+    <section id="counter-section" class="relative py-20 md:py-32 fade-section" style="z-index:2;">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <!-- Red glow behind number -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blood-600/10 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
+            <div class="relative">
+                <p class="text-blood-400 text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-6"> شمارش روزهای
+                    ایستادگی مردم ایران با ظلم و استکبار</p>
+                <div class="flex items-center justify-center gap-2 md:gap-4 mb-4">
+                    <span id="counter-number"
+                        class="counter-glow text-7xl md:text-9xl lg:text-[10rem] font-black text-blood-500 leading-none tabular-nums">۰</span>
+                </div>
+                <!-- --------------------------------- -->
+                <p class="text-stone-400 text-lg md:text-2xl font-light">شب در میدان</p>
+                <!-- ---------------------------------------- -->
+                <p class="text-stone-400 text-lg md:text-2xl font-light">از روز شهادت رهبر و فرشتگان میناب:<span
+                        class="text-blood-400 font-bold">۹ اسفند ۱۴۰۴</span></p>
+
+                <div class="mt-8 flex items-center justify-center gap-6 text-stone-500 text-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="iconify text-blood-600" data-icon="mdi:calendar-today"></span>
+                        <span id="today-jalali">---</span>
+                    </div>
+                    <div class="w-1 h-1 rounded-full bg-blood-800"></div>
+                    <div class="flex items-center gap-2">
+                        <span class="iconify text-blood-600" data-icon="mdi:clock-outline"></span>
+                        <span id="current-time">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DIVIDER ===== -->
+    <div class="relative py-8 flex items-center justify-center gap-4" style="z-index:2;">
+        <div class="h-px w-16 md:w-32 bg-gradient-to-l from-blood-700 to-transparent"></div>
+        <span class="iconify text-blood-600 text-2xl" data-icon="mdi:fire"></span>
+        <div class="h-px w-16 md:w-32 bg-gradient-to-r from-blood-700 to-transparent"></div>
+    </div>
+
+    <!-- ===== TIMELINE SECTION ===== -->
+    <section id="timeline-section" class="relative py-16 md:py-24 px-6" style="z-index:2;">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 fade-section">
+                <p class="text-blood-400 text-xs font-bold tracking-[0.3em] uppercase mb-3">خط زمان مقاومت</p>
+                <h2 class="text-3xl md:text-5xl font-black text-white">هر روز، یک قدم به انقلاب مهدی صاحب الزمان</h2>
+            </div>
+
+            <div class="relative" id="timeline-container">
+                <div class="timeline-line"></div>
+                <div id="timeline-entries" class="relative">
+                    <!-- Entries injected by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MEMORIAL SECTION ===== -->
+    <section class="relative py-20 md:py-32 px-6 fade-section" style="z-index:2;">
+        <div class="max-w-3xl mx-auto text-center">
+            <div
+                class="border border-blood-900/50 rounded-2xl p-10 md:p-16 bg-gradient-to-b from-blood-950/30 to-transparent backdrop-blur-sm">
+                <span class="iconify text-blood-600 text-5xl mb-6 block mx-auto" data-icon="mdi:candle"></span>
+                <h3 class="text-2xl md:text-4xl font-black text-white mb-4">یاد همه شهدای راه انقلاب گرامی باد</h3>
+                <p class="text-stone-400 text-base md:text-lg font-light leading-relaxed">
+                    آن‌ها رفتند تا ما بمانیم. آن‌ها سکوت کردند تا صدای ما بلند شود.
+                    خونشان بذر انقلاب شد و راهشان را ادامه می‌دهیم.
+                </p>
+                <div class="mt-8 flex items-center justify-center gap-3">
+                    <div class="w-2 h-2 rounded-full bg-blood-500"></div>
+                    <div class="w-2 h-2 rounded-full bg-blood-600"></div>
+                    <div class="w-2 h-2 rounded-full bg-blood-700"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="relative py-12 px-6 border-t border-blood-950/50" style="z-index:2;">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-stone-600 text-sm">ایران به دست صاحب الزمان خواهد رسید؛این انقلاب،انقلاب مهدی است.</p>
+            <div class="flex items-center gap-2 text-stone-700 text-xs">
+                <span class="iconify" data-icon="mdi:heart" style="color:#dc2626"></span>
+                <span>ساخته شده با عشق برای جمهوری اسلامی ایران</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===========================
+        // SLIDES DATA
+        // ===========================
+        const slides = [
+            {
+                image: './صالحٌ‌بعدصالح-خام.jpg',
+                title: 'ایران، زمین پاک',
+                subtitle: 'سرزمینی که تاریخ در آن نفس می‌کشد و انقلاب در خونش جاری است'
+            },
+            {
+                image: './1200 x 400 - CMYK - 3.jpg',
+                title: 'شهدای راه انقلاب',
+                subtitle: 'ستاره‌هایی که خاموش شدند تا آسمان ما روشن بماند'
+            },
+            {
+                image: './1250 x 200 - Agha Mojtaba - 2.jpg',
+                title: 'میدان، جایگاه ایستادگی',
+                subtitle: 'جایی که ملت ایران نشان داد که از هیچ‌کس نمی‌ترسد'
+            },
+            {
+                image: './عکس-پرچم-ایران-برای-پس-زمینه-دسکتاپ.jpg',
+                title: 'خون شهدا، بذر پیروزی انقلاب اسلامی',
+                subtitle: 'هر قطره خون، یک درخت انقلاب خواهد شد'
+            },
+            {
+                image: './ChatGPT Image Aug 3, 2026, 11_25_41 PM.jpg',
+                title: 'مذاکره حرام است.',
+                subtitle: 'فریادی که جهان را لرزاند و تاریخ را تغییر داد'
+            },
+            // {
+            //     image: 'https://picsum.photos/seed/dark-hope-11/1920/1080',
+            //     title: 'در دل تاریکی، امید می‌روید',
+            //     subtitle: 'شب‌های سخت، سپیده‌دم‌های روشن را می‌سازند'
+            // },
+            // {
+            //     image: 'https://picsum.photos/seed/unity-people-44/1920/1080',
+            //     title: 'وحدت ملی، قدرت بی‌نظیر',
+            //     subtitle: 'وقتی یک ملت یک صدا شود، هیچ قدرتی نمی‌تواند ایستد'
+            // },
+            // {
+            //     image: 'https://picsum.photos/seed/freedom-dawn-66/1920/1080',
+            //     title: 'ایران آزاد خواهد شد',
+            //     subtitle: 'این وعده خداست، این وعده ملت است، این حتمی است'
+            // }
+        ];
+
+        // ===========================
+        // JALALI DATE CONVERTER
+        // ===========================
+        function gregorianToJalali(gy, gm, gd) {
+            const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+            let gy2 = (gm > 2) ? (gy + 1) : gy;
+            let days = 355666 + (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) + gd + g_d_m[gm - 1];
+            let jy = -1595 + (33 * Math.floor(days / 12053));
+            days %= 12053;
+            jy += 4 * Math.floor(days / 1461);
+            days %= 1461;
+            if (days > 365) {
+                jy += Math.floor((days - 1) / 365);
+                days = (days - 1) % 365;
+            }
+            let jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+            let jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+            return [jy, jm, jd];
+        }
+
+        function toPersianNum(num) {
+            const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return String(num).replace(/[0-9]/g, d => persianDigits[d]);
+        }
+
+        const jalaliMonths = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
+        function formatJalali(gy, gm, gd) {
+            const [jy, jm, jd] = gregorianToJalali(gy, gm, gd);
+            return `${toPersianNum(jd)} ${jalaliMonths[jm - 1]} ${toPersianNum(jy)}`;
+        }
+
+        // ===========================
+        // DATE CALCULATIONS
+        // تغییر سال اینجا: اگر نیاز هست 1404 رو تغییر بدید
+        // ۹ اسفند ۱۴۰۴ = 27 فوریه 2026
+        // ===========================
+        const START_DATE = new Date(2026, 1, 27); // month is 0-indexed
+        const TODAY = new Date();
+        TODAY.setHours(0, 0, 0, 0);
+        const DIFF_DAYS = Math.max(0, Math.floor((TODAY - START_DATE) / (1000 * 60 * 60 * 24)));
+
+        // Show today's Jalali date
+        const now = new Date();
+        document.getElementById('today-jalali').textContent = formatJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+
+        // Update clock
+        function updateClock() {
+            const n = new Date();
+            document.getElementById('current-time').textContent = toPersianNum(String(n.getHours()).padStart(2, '0')) + ':' + toPersianNum(String(n.getMinutes()).padStart(2, '0'));
+        }
+        updateClock();
+        setInterval(updateClock, 10000);
+
+        // ===========================
+        // PARTICLES SYSTEM
+        // ===========================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = -(Math.random() * 0.5 + 0.15);
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.4 + 0.1;
+                this.fadeSpeed = Math.random() * 0.001 + 0.0005;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.opacity -= this.fadeSpeed;
+                if (this.opacity <= 0 || this.y < -20) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(220, 38, 38, ${this.opacity})`;
+                ctx.fill();
+                // Glow
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(220, 38, 38, ${this.opacity * 0.15})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            const p = new Particle();
+            p.y = Math.random() * canvas.height;
+            particles.push(p);
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===========================
+        // SLIDESHOW CONTROLLER
+        // ===========================
+        let currentSlide = 0;
+        let activeLayer = 'a';
+        const SLIDE_INTERVAL = 40000; // 40 seconds
+
+        // Initialize first slide
+        function initSlideshow() {
+            const imgA = document.getElementById('img-a');
+            imgA.src = slides[0].image;
+            document.getElementById('caption-title').textContent = slides[0].title;
+            document.getElementById('caption-subtitle').textContent = slides[0].subtitle;
+
+            // Create indicators
+            const indicatorsContainer = document.getElementById('indicators');
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'indicator' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(dot);
+            });
+        }
+
+        function goToSlide(index) {
+            if (index === currentSlide) return;
+
+            const nextLayer = activeLayer === 'a' ? 'b' : 'a';
+            const currentEl = document.getElementById(`slide-${activeLayer}`);
+            const nextEl = document.getElementById(`slide-${nextLayer}`);
+            const nextImg = document.getElementById(`img-${nextLayer}`);
+
+            // Set next image
+            nextImg.src = slides[index].image;
+
+            // Reset Ken Burns
+            nextImg.className = '';
+            void nextImg.offsetHeight;
+            nextImg.className = `kb-${(index % 8) + 1}`;
+
+            // Flash effect
+            const flash = document.getElementById('flash');
+            flash.classList.remove('flash');
+            void flash.offsetHeight;
+            flash.classList.add('flash');
+
+            // Fade out text
+            const title = document.getElementById('caption-title');
+            const subtitle = document.getElementById('caption-subtitle');
+            title.classList.remove('visible');
+            subtitle.classList.remove('visible');
+
+            // Fade layers
+            nextEl.style.opacity = '1';
+            currentEl.style.opacity = '0';
+
+            // Update text after delay
+            setTimeout(() => {
+                title.textContent = slides[index].title;
+                subtitle.textContent = slides[index].subtitle;
+                title.classList.add('visible');
+                subtitle.classList.add('visible');
+            }, 800);
+
+            // Update indicators
+            document.querySelectorAll('.indicator').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+
+            // Reset progress bar
+            resetProgress();
+
+            activeLayer = nextLayer;
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        function resetProgress() {
+            const bar = document.getElementById('progress-bar');
+            bar.style.animation = 'none';
+            void bar.offsetHeight;
+            bar.style.animation = 'progressFill 40s linear forwards';
+        }
+
+        initSlideshow();
+        setInterval(nextSlide, SLIDE_INTERVAL);
+
+        // ===========================
+        // COUNTER ANIMATION
+        // ===========================
+        let counterAnimated = false;
+        function animateCounter() {
+            if (counterAnimated) return;
+            counterAnimated = true;
+
+            const el = document.getElementById('counter-number');
+            const target = DIFF_DAYS;
+            const duration = 2000;
+            const start = performance.now();
+
+            function step(timestamp) {
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                const current = Math.round(eased * target);
+                el.textContent = toPersianNum(current);
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        // ===========================
+        // TIMELINE GENERATOR
+        // ===========================
+        const milestones = [
+            { day: 0, title: "آغاز مسیر جهاد و انتقام از صیونیسم", desc: "مردم ایران به میدان آمدند،و صدای خون های پاک ریخته شده را به جهانیان اعلام کردند", icon: "mdi:bullhorn-outline" },
+            { day: 1, title: "ایستادگی در میدان", desc: "تجمعات در شهرهای مختلف ادامه یافت", icon: "mdi:account-group-outline" },
+            { day: 3, title: "حضور پرشور مردمی", desc: "تعداد مردم در میدان به شکل چشمگیری افزایش یافت", icon: "mdi:trending-up" },
+            { day: 7, title: "کودکان و فرشته های زمینی میناب", desc: "خون فرزندان ایران بر زمین چکید، اما رژیم صهیونیستی باخت", icon: "mdi:candle" },
+            { day: 10, title: "استقامت سراسری", desc: "مردم هر روز در میدان، از شمال تا جنوب، از شرق تا غرب ایران حضور پیدا میکنند ", icon: "mdi:map-marker-radius-outline" },
+            { day: 14, title: "دو هفته پایداری", desc: "موشک های صهمیونستی نتوانست صدای مردم ایران را خاموش کند", icon: "mdi:shield-check-outline" },
+            { day: 21, title: "سه هفته مقاومت", desc: "شهدای بیشتری به لیست شهدای مظلوم جنگ رمضان اضافه شدند", icon: "mdi:star-four-points-outline" },
+            { day: 30, title: "یک ماه ایستادگی", desc: "سی روز گذشت و مردم قوی‌تر از همیشه ایستاده‌اند", icon: "mdi:calendar-check-outline" },
+            { day: 40, title: "پیام به جهان", desc: " خارج از کشور نیز دست به حمایت از جمهوری اسلامی زدند", icon: "mdi:earth" },
+            { day: 50, title: "حمایت بین‌المللی", desc: "صدای ایران در مجامع بین‌المللی شنیده شد", icon: "mdi:handshake-outline" },
+            { day: 60, title: "دو ماه مقاومت", desc: "نه خسته‌ایم، نه مأیوس، نه عقب‌نشینی", icon: "mdi:fire" },
+            { day: 90, title: "سه ماه پایداری", desc: "مقاومت ادامه دارد، آزادی نزدیک‌تر می‌شود", icon: "mdi:flag-outline" },
+            { day: 120, title: "چهار ماه ایستادگی", desc: "هر روز یک قدم به  نابودی اسرائیل و آمریکا نزدیکتر میشویم.", icon: "mdi:walk" },
+            { day: 150, title: "پنج ماه مقاومت", desc: "راه شهدای ما روشن است، ادامه می‌دهیم", icon: "mdi:lightbulb-on-outline" },
+            { day: 180, title: "شش ماه پایداری", desc: "نیم سال ایستادگی، یک ملت یک صدا", icon: "mdi:microphone-outline" },
+            { day: 270, title: "نه ماه مقاومت", desc: "بهار آزادی نزدیک است، زمستان تمام می‌شود", icon: "mdi:flower-outline" },
+            { day: 365, title: "یک سال کامل ایستادگی", desc: "سالگرد آغاز مسیر — ایران آزاد خواهد شد", icon: "mdi:trophy-outline" },
+        ];
+
+        function buildTimeline() {
+            const container = document.getElementById('timeline-entries');
+
+            if (DIFF_DAYS === 0) {
+                container.innerHTML = `
+                <div class="text-center py-20">
+                    <span class="iconify text-blood-700 text-5xl mb-4 block mx-auto" data-icon="mdi:clock-alert-outline"></span>
+                    <p class="text-stone-500 text-lg">تایم‌لاین از ۹ اسفند ۱۴۰۴ آغاز می‌شود</p>
+                    <p class="text-stone-600 text-sm mt-2">هر روز که بگذرد، رویدادهای جدید اضافه خواهد شد</p>
+                </div>
+            `;
+                return;
+            }
+
+            // Filter milestones that have passed
+            const visibleMilestones = milestones.filter(m => m.day <= DIFF_DAYS);
+
+            // Add generic entries for every 10 days that don't have a milestone
+            const milestoneDays = new Set(visibleMilestones.map(m => m.day));
+            const genericEntries = [];
+            for (let d = 0; d <= DIFF_DAYS; d += 10) {
+                if (!milestoneDays.has(d) && d > 0) {
+                    genericEntries.push({ day: d, title: `روز ${toPersianNum(d)}م مقاومت`, desc: "ایستادگی مردم ادامه دارد", icon: "mdi:circle-small" });
+                }
+            }
+
+            // Merge and sort
+            const allEntries = [...visibleMilestones, ...genericEntries].sort((a, b) => a.day - b.day);
+
+            // Limit to last 20 entries for performance
+            const displayEntries = allEntries.slice(-20);
+
+            displayEntries.forEach((entry, i) => {
+                const date = new Date(START_DATE);
+                date.setDate(date.getDate() + entry.day);
+                const dateStr = formatJalali(date.getFullYear(), date.getMonth() + 1, date.getDate());
+                const isRight = i % 2 === 0;
+
+                const div = document.createElement('div');
+                div.className = 'timeline-entry relative pb-12 md:pb-16';
+                div.innerHTML = `
+                <div class="timeline-dot"></div>
+                <div class="md:w-[45%] ${isRight ? 'md:ml-auto md:pl-12' : 'md:mr-auto md:pr-12'} pr-12 md:pr-0">
+                    <div class="bg-blood-950/20 border border-blood-900/30 rounded-xl p-5 md:p-6 hover:border-blood-700/40 transition-colors duration-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="iconify text-blood-500 text-xl" data-icon="${entry.icon}"></span>
+                            <span class="text-blood-400 text-xs font-bold tracking-wider">${dateStr}</span>
+                            ${entry.day === 0 ? '<span class="bg-blood-600/20 text-blood-400 text-[10px] font-bold px-2 py-0.5 rounded-full">شروع</span>' : ''}
+                        </div>
+                        <h4 class="text-white font-bold text-base md:text-lg mb-1">${entry.title}</h4>
+                        <p class="text-stone-400 text-sm font-light leading-relaxed">${entry.desc}</p>
+                    </div>
+                </div>
+            `;
+                container.appendChild(div);
+            });
+        }
+
+        buildTimeline();
+
+        // ===========================
+        // SCROLL REVEAL
+        // ===========================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible', 'revealed');
+
+                    // Trigger counter animation when counter section is visible
+                    if (entry.target.id === 'counter-section') {
+                        animateCounter();
+                    }
+
+                    // Stagger timeline entries
+                    if (entry.target.classList.contains('timeline-entry')) {
+                        const entries = document.querySelectorAll('.timeline-entry');
+                        entries.forEach((el, i) => {
+                            setTimeout(() => el.classList.add('revealed'), i * 150);
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-section, .timeline-entry').forEach(el => observer.observe(el));
+
+        // Also observe counter section specifically
+        observer.observe(document.getElementById('counter-section'));
+
+        // ===========================
+        // HIDE SCROLL INDICATOR ON SCROLL
+        // ===========================
+        let scrollIndicatorHidden = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollIndicatorHidden && window.scrollY > 100) {
+                const si = document.querySelector('.scroll-indicator');
+                if (si) {
+                    si.style.transition = 'opacity 0.5s ease';
+                    si.style.opacity = '0';
+                    scrollIndicatorHidden = true;
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
